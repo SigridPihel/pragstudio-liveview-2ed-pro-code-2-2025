@@ -10,7 +10,7 @@ defmodule LiveViewStudioWeb.LightLive do
   # render
   def render(assigns) do
     ~H"""
-    <h1>Front Porch Light</h1>
+    <h1 class="text-3xl font-raleway">Front Porch Light</h1>
     <div id="light">
       <div class="meter">
         <span style={"width: #{@brightness}%"}>
@@ -43,12 +43,12 @@ defmodule LiveViewStudioWeb.LightLive do
   end
 
   def handle_event("up", _, socket) do
-    socket = update(socket, :brightness, fn brightness -> brightness + 10 end)
+    socket = update(socket, :brightness, fn brightness -> min(brightness + 10, 100) end)
     {:noreply, socket}
   end
 
   def handle_event("down", _, socket) do
-    socket = update(socket, :brightness, fn brightness -> brightness - 10 end)
+    socket = update(socket, :brightness, fn brightness -> max(brightness - 10, 0) end)
     {:noreply, socket}
   end
 

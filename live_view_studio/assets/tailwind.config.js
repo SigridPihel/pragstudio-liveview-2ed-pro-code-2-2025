@@ -17,7 +17,7 @@ module.exports = {
         brand: "#FD4F00",
       },
       fontFamily: {
-        secret: ['TopSecret']
+        'raleway': ['Raleway', 'sans-serif'],
       },
     },
   },
