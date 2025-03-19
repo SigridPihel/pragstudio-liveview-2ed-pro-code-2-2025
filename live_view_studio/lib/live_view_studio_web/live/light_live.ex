@@ -10,7 +10,7 @@ defmodule LiveViewStudioWeb.LightLive do
   # render
   def render(assigns) do
     ~H"""
-    <h1 class="text-3xl font-raleway">Front Porch Light</h1>
+    <h1>Front Porch Light</h1>
     <div id="light">
       <div class="meter">
         <span style={"width: #{@brightness}%"}>
