@@ -50,7 +50,7 @@ defmodule LiveViewStudioWeb.BingoLive do
     ~w(B I N G O)
     |> Enum.zip(Enum.chunk_every(1..75, 15))
     |> Enum.flat_map(fn {letter, numbers} ->
-      Enum.map(numbers, &"#{letter} #{&1}")
+      Enum.map(numbers, &"#{letter}  #{&1}")
     end)
     |> Enum.shuffle()
   end
