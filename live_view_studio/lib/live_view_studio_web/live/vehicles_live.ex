@@ -26,6 +26,7 @@ defmodule LiveViewStudioWeb.VehiclesLive do
           placeholder="Make or model"
           autofocus
           autocomplete="off"
+          readonly={@loading}
         />
 
         <button>
@@ -63,7 +64,7 @@ defmodule LiveViewStudioWeb.VehiclesLive do
         vehicles: [],
         loading: true
       )
-      
+
     {:noreply, socket}
   end
 
