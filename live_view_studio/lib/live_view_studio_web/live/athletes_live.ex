@@ -10,7 +10,7 @@ defmodule LiveViewStudioWeb.AthletesLive do
         athletes: Athletes.list_athletes()
       )
 
-    {:ok, socket}
+    {:ok, socket, temporary_assigns: [athletes: []]}
   end
 
   def render(assigns) do
@@ -57,7 +57,12 @@ defmodule LiveViewStudioWeb.AthletesLive do
 
   def handle_event("filter", %{"sport" => sport, "status" => status}, socket) do
     filter = %{sport: sport, status: status}
+
     athletes = Athletes.list_athletes(filter)
+
+    # IO.inspect(length(socket.assigns.athletes), label: "Assigned athletes")
+    # IO.inspect(length(athletes), label: "Filtered athletes")
+
     {:noreply, assign(socket, athletes: athletes, filter: filter)}
   end
 
