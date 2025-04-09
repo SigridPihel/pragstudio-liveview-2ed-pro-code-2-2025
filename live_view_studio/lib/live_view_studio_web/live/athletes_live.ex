@@ -23,7 +23,7 @@ defmodule LiveViewStudioWeb.AthletesLive do
       <div class="athletes">
         <.athlete :for={athlete <- @athletes} athlete={athlete} />
       </div>
-      
+
     </div>
     """
   end
