@@ -4,7 +4,7 @@ defmodule LiveViewStudioWeb.DonationsLive do
   alias LiveViewStudio.Donations
 
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, socket, temporary_assigns: [donations: []]}
   end
 
   def handle_params(params, _uri, socket) do
@@ -26,6 +26,10 @@ defmodule LiveViewStudioWeb.DonationsLive do
 
     {:noreply, socket}
   end
+
+  attr :options, :map, required: true
+  attr :sort_by, :atom, required: true
+  slot :inner_block, required: true
 
   def sort_link(assigns) do
     ~H"""
