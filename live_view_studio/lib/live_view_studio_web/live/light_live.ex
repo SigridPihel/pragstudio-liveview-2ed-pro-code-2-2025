@@ -18,19 +18,19 @@ defmodule LiveViewStudioWeb.LightLive do
         </span>
       </div>
       <button phx-click="off">
-        <img src="images/light-off.svg">
+        <img src="images/light-off.svg" />
       </button>
       <button phx-click="down">
-        <img src="images/down.svg">
+        <img src="images/down.svg" />
       </button>
       <button phx-click="up">
-        <img src="images/up.svg">
+        <img src="images/up.svg" />
       </button>
       <button phx-click="on">
-        <img src="images/light-on.svg">
+        <img src="images/light-on.svg" />
       </button>
       <button phx-click="random">
-        <img src="images/fire.svg">
+        <img src="images/fire.svg" />
       </button>
 
       <form phx-change="update">
@@ -48,8 +48,14 @@ defmodule LiveViewStudioWeb.LightLive do
         <div class="temps">
           <%= for temp <- ["3000", "4000", "5000"] do %>
             <div>
-              <input type="radio" id={temp} name="temp" value={temp} checked={temp == @temp} />
-              <label for={temp}><%= temp %></label>
+              <input
+                type="radio"
+                id={temp}
+                name="temp"
+                value={temp}
+                checked={temp == @temp}
+              />
+              <label for={temp}>{temp}</label>
             </div>
           <% end %>
         </div>

@@ -19,7 +19,7 @@ defmodule LiveViewStudioWeb.SalesLive do
       <div class="stats">
         <div class="stat">
           <span class="value">
-            <%= @new_orders %>
+            {@new_orders}
           </span>
           <span class="label">
             New Orders
@@ -27,7 +27,7 @@ defmodule LiveViewStudioWeb.SalesLive do
         </div>
         <div class="stat">
           <span class="value">
-            $<%= @sales_amount %>
+            ${@sales_amount}
           </span>
           <span class="label">
             Sales Amount
@@ -35,7 +35,7 @@ defmodule LiveViewStudioWeb.SalesLive do
         </div>
         <div class="stat">
           <span class="value">
-            <%= @satisfaction %>%
+            {@satisfaction}%
           </span>
           <span class="label">
             Satisfaction
@@ -60,9 +60,9 @@ defmodule LiveViewStudioWeb.SalesLive do
 
   defp assign_stats(socket) do
     assign(socket,
-        new_orders: Sales.new_orders(),
-        sales_amount: Sales.sales_amount(),
-        satisfaction: Sales.satisfaction()
-      )
+      new_orders: Sales.new_orders(),
+      sales_amount: Sales.sales_amount(),
+      satisfaction: Sales.satisfaction()
+    )
   end
 end

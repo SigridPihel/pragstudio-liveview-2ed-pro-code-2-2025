@@ -17,13 +17,11 @@ defmodule LiveViewStudioWeb.AthletesLive do
     ~H"""
     <h1>Athletes</h1>
     <div id="athletes">
-
       <.filter_form filter={@filter} />
 
       <div class="athletes">
         <.athlete :for={athlete <- @athletes} athlete={athlete} />
       </div>
-
     </div>
     """
   end
@@ -34,17 +32,17 @@ defmodule LiveViewStudioWeb.AthletesLive do
     ~H"""
     <div class="athlete">
       <div class="emoji">
-        <%= @athlete.emoji %>
+        {@athlete.emoji}
       </div>
       <div class="name">
-        <%= @athlete.name %>
+        {@athlete.name}
       </div>
       <div class="details">
         <span class="sport">
-          <%= @athlete.sport %>
+          {@athlete.sport}
         </span>
         <span class="status">
-          <%= @athlete.status %>
+          {@athlete.status}
         </span>
       </div>
     </div>
@@ -58,16 +56,16 @@ defmodule LiveViewStudioWeb.AthletesLive do
     <form phx-change="filter">
       <div class="filters">
         <select name="sport">
-          <%= Phoenix.HTML.Form.options_for_select(
+          {Phoenix.HTML.Form.options_for_select(
             sport_options(),
             @filter.sport
-          ) %>
+          )}
         </select>
         <select name="status">
-          <%= Phoenix.HTML.Form.options_for_select(
+          {Phoenix.HTML.Form.options_for_select(
             status_options(),
             @filter.status
-          ) %>
+          )}
         </select>
       </div>
     </form>

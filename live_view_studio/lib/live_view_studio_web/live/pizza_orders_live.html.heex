@@ -27,22 +27,22 @@
       <tbody>
         <tr :for={order <- @pizza_orders}>
           <td class="id">
-            <%= order.id %>
+            {order.id}
           </td>
           <td>
-            <%= order.size %>
+            {order.size}
           </td>
           <td>
-            <%= order.style %>
+            {order.style}
           </td>
           <td>
-            <%= order.topping_1 %>
+            {order.topping_1}
           </td>
           <td>
-            <%= order.topping_2 %>
+            {order.topping_2}
           </td>
           <td class="price">
-            <%= number_to_currency(order.price) %>
+            {number_to_currency(order.price)}
           </td>
         </tr>
       </tbody>

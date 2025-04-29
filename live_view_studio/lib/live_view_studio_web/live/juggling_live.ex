@@ -28,13 +28,13 @@ defmodule LiveViewStudioWeb.JugglingLive do
 
       <div class="footer">
         <div class="filename">
-          <%= Enum.at(@images, @current) %>
+          {Enum.at(@images, @current)}
         </div>
 
         <input type="number" value={@current} />
 
         <button phx-click="toggle-playing">
-          <%= if @is_playing, do: "Pause", else: "Play" %>
+          {if @is_playing, do: "Pause", else: "Play"}
         </button>
       </div>
     </div>

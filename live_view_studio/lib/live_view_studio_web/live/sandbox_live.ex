@@ -12,7 +12,8 @@ defmodule LiveViewStudioWeb.SandboxLive do
         depth: "0",
         weight: 0.0,
         price: nil
-        )
+      )
+
     {:ok, socket}
   end
 
@@ -45,15 +46,14 @@ defmodule LiveViewStudioWeb.SandboxLive do
           </div>
         </div>
         <div class="weight">
-          You need <%= @weight %> pounds of sand 🏝
+          You need {@weight} pounds of sand 🏝
         </div>
         <button type="submit">
           Get A Quote
         </button>
       </form>
       <div :if={@price} class="quote">
-        Get your personal beach today for only
-        <%= number_to_currency(@price) %>
+        Get your personal beach today for only {number_to_currency(@price)}
       </div>
     </div>
     """

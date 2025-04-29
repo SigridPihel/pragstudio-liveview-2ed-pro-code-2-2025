@@ -13,7 +13,7 @@ defmodule LiveViewStudioWeb.BoatsLive do
       )
 
     {:ok, socket, temporary_assigns: [boats: []]}
-    end
+  end
 
   def render(assigns) do
     ~H"""
@@ -27,7 +27,6 @@ defmodule LiveViewStudioWeb.BoatsLive do
     </.promo>
 
     <div id="boats">
-
       <.filter_form filter={@filter} />
 
       <div class="boats">
@@ -38,7 +37,6 @@ defmodule LiveViewStudioWeb.BoatsLive do
     <.promo>
       Hurry, only 3 boats left!
     </.promo>
-
     """
   end
 
@@ -50,14 +48,14 @@ defmodule LiveViewStudioWeb.BoatsLive do
       <img src={@boat.image} />
       <div class="content">
         <div class="model">
-          <%= @boat.model %>
+          {@boat.model}
         </div>
         <div class="details">
           <span class="price">
-            <%= @boat.price %>
+            {@boat.price}
           </span>
           <span class="type">
-            <%= @boat.type %>
+            {@boat.type}
           </span>
         </div>
       </div>
@@ -72,10 +70,10 @@ defmodule LiveViewStudioWeb.BoatsLive do
     <form phx-change="filter">
       <div class="filters">
         <select name="type">
-          <%= Phoenix.HTML.Form.options_for_select(
+          {Phoenix.HTML.Form.options_for_select(
             type_options(),
             @filter.type
-          ) %>
+          )}
         </select>
         <div class="prices">
           <%= for price <- ["$", "$$", "$$$"] do %>
@@ -86,7 +84,7 @@ defmodule LiveViewStudioWeb.BoatsLive do
               id={price}
               checked={price in @filter.prices}
             />
-            <label for={price}><%= price %></label>
+            <label for={price}>{price}</label>
           <% end %>
           <input type="hidden" name="prices[]" value="" />
         </div>

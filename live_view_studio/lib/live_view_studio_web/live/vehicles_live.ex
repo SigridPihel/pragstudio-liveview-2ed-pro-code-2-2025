@@ -39,7 +39,7 @@ defmodule LiveViewStudioWeb.VehiclesLive do
 
       <datalist id="matches">
         <option :for={vehicle <- @matches} value={vehicle}>
-          <%= vehicle %>
+          {vehicle}
         </option>
       </datalist>
 
@@ -49,13 +49,13 @@ defmodule LiveViewStudioWeb.VehiclesLive do
         <ul>
           <li :for={vehicle <- @vehicles}>
             <span class="make-model">
-              <%= vehicle.make_model %>
+              {vehicle.make_model}
             </span>
             <span class="color">
-              <%= vehicle.color %>
+              {vehicle.color}
             </span>
             <span class={"status #{vehicle.status}"}>
-              <%= vehicle.status %>
+              {vehicle.status}
             </span>
           </li>
         </ul>

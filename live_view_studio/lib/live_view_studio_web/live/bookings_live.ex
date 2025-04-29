@@ -27,18 +27,18 @@ defmodule LiveViewStudioWeb.BookingsLive do
       <div :if={@selected_dates} class="details">
         <div>
           <span class="date">
-            <%= format_date(@selected_dates.from) %>
+            {format_date(@selected_dates.from)}
           </span>
           -
           <span class="date">
-            <%= format_date(@selected_dates.to) %>
+            {format_date(@selected_dates.to)}
           </span>
           <span class="nights">
-            (<%= total_nights(@selected_dates) %> nights)
+            ({total_nights(@selected_dates)} nights)
           </span>
         </div>
         <div class="price">
-          <%= total_price(@selected_dates) %>
+          {total_price(@selected_dates)}
         </div>
         <button phx-click="book-selected-dates">
           Book Dates

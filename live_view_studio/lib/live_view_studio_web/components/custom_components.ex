@@ -1,5 +1,4 @@
 defmodule LiveViewStudioWeb.CustomComponents do
-
   use Phoenix.Component
 
   attr :expiration, :integer, default: 24
@@ -13,13 +12,13 @@ defmodule LiveViewStudioWeb.CustomComponents do
     ~H"""
     <div class="promo">
       <div class="deal">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </div>
       <div class="expiration">
-        Deal expires in <%= @expiration %> hours and in <%= @minutes %> minutes
+        Deal expires in {@expiration} hours and in {@minutes} minutes
       </div>
       <div class="legal">
-        <%= render_slot(@legal) %>
+        {render_slot(@legal)}
       </div>
     </div>
     """
@@ -31,10 +30,10 @@ defmodule LiveViewStudioWeb.CustomComponents do
     ~H"""
     <div :if={@visible} class="flex justify-center my-10 relative">
       <div>
-        <span class="animate-perspective inline-flex h-6 w-6 bg-indigo-500"></span>
+        <span class="animate-perspective inline-flex h-6 w-6 bg-indigo-500">
+        </span>
       </div>
     </div>
     """
   end
-
 end

@@ -23,14 +23,14 @@ defmodule LiveViewStudioWeb.VolunteersLive do
         class={"volunteer #{if volunteer.checked_out, do: "out"}"}
       >
         <div class="name">
-          <%= volunteer.name %>
+          {volunteer.name}
         </div>
         <div class="phone">
-          <%= volunteer.phone %>
+          {volunteer.phone}
         </div>
         <div class="status">
           <button>
-            <%= if volunteer.checked_out, do: "Check In", else: "Check Out" %>
+            {if volunteer.checked_out, do: "Check In", else: "Check Out"}
           </button>
         </div>
       </div>

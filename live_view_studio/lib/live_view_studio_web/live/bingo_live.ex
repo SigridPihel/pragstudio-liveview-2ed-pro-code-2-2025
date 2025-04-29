@@ -6,6 +6,7 @@ defmodule LiveViewStudioWeb.BingoLive do
       # send message
       :timer.send_interval(3000, self(), :tick)
     end
+
     socket =
       assign(socket,
         number: nil,
@@ -20,7 +21,7 @@ defmodule LiveViewStudioWeb.BingoLive do
     <h1>Bingo Boss 📢</h1>
     <div id="bingo">
       <div class="number">
-        <%= @number %>
+        {@number}
       </div>
     </div>
     """
