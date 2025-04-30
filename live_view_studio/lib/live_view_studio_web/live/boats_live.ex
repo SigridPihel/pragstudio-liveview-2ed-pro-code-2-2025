@@ -15,31 +15,6 @@ defmodule LiveViewStudioWeb.BoatsLive do
     {:ok, socket, temporary_assigns: [boats: []]}
   end
 
-  def render(assigns) do
-    ~H"""
-    <h1>Daily Boat Rentals</h1>
-
-    <.promo expiration={2}>
-      Save 25% on rentals!
-      <:legal>
-        <Heroicons.exclamation_circle /> Limit 1 per party
-      </:legal>
-    </.promo>
-
-    <div id="boats">
-      <.filter_form filter={@filter} />
-
-      <div class="boats">
-        <.boat :for={boat <- @boats} boat={boat} />
-      </div>
-    </div>
-
-    <.promo>
-      Hurry, only 3 boats left!
-    </.promo>
-    """
-  end
-
   attr :boat, LiveViewStudio.Boats.Boat, required: true
 
   def boat(assigns) do
