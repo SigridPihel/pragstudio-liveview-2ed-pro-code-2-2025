@@ -11,9 +11,14 @@ defmodule LiveViewStudioWeb.DonationsLive do
     sort_by = valid_sort_by(params)
     sort_order = valid_sort_order(params)
 
+    page = (params["page"] || "1") |> String.to_integer()
+    per_page = (params["per_page"] || "5") |> String.to_integer()
+
     options = %{
       sort_by: sort_by,
-      sort_order: sort_order
+      sort_order: sort_order,
+      page: page,
+      per_page: per_page
     }
 
     donations = Donations.list_donations(options)
@@ -27,14 +32,30 @@ defmodule LiveViewStudioWeb.DonationsLive do
     {:noreply, socket}
   end
 
+  def handle_event("select-per-page", %{"per-page" => per_page}, socket) do
+    params = %{socket.assigns.options | per_page: per_page}
+
+    socket = push_patch(socket, to: ~p"/donations?#{params}")
+    
+    {:noreply, socket}
+  end
+
   attr :options, :map, required: true
   attr :sort_by, :atom, required: true
   slot :inner_block, required: true
 
   def sort_link(assigns) do
+    params = %{
+      assigns.options
+      | sort_by: assigns.sort_by,
+        sort_order: next_sort_order(assigns.options.sort_order)
+    }
+
+    assigns = assign(assigns, params: params)
+
     ~H"""
     <.link patch={
-      ~p"/donations?#{%{sort_by: @sort_by, sort_order: next_sort_order(@options.sort_order)}}"
+      ~p"/donations?#{@params}"
     }>
       <%= render_slot(@inner_block) %>
       <%= sort_indicator(@sort_by, @options) %>
