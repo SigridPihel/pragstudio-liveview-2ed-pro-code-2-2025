@@ -22,11 +22,13 @@ defmodule LiveViewStudioWeb.DonationsLive do
     }
 
     donations = Donations.list_donations(options)
+    donation_count = Donations.donation_count()
 
     socket =
       assign(socket,
         donations: donations,
-        options: options
+        options: options,
+        donation_count: donation_count
       )
 
     {:noreply, socket}
@@ -61,6 +63,10 @@ defmodule LiveViewStudioWeb.DonationsLive do
       <%= sort_indicator(@sort_by, @options) %>
     </.link>
     """
+  end
+
+  defp more_pages?(options, donation_count) do
+    options.page * options.per_page < donation_count
   end
 
   defp param_to_integer(nil, default), do: default
