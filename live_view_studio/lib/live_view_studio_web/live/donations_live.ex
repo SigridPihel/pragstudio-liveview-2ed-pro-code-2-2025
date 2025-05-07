@@ -11,8 +11,8 @@ defmodule LiveViewStudioWeb.DonationsLive do
     sort_by = valid_sort_by(params)
     sort_order = valid_sort_order(params)
 
-    page = (params["page"] || "1") |> String.to_integer()
-    per_page = (params["per_page"] || "5") |> String.to_integer()
+    page = param_to_integer(params["page"], 1)
+    per_page = param_to_integer(params["per_page"], 5)
 
     options = %{
       sort_by: sort_by,
@@ -36,7 +36,7 @@ defmodule LiveViewStudioWeb.DonationsLive do
     params = %{socket.assigns.options | per_page: per_page}
 
     socket = push_patch(socket, to: ~p"/donations?#{params}")
-    
+
     {:noreply, socket}
   end
 
@@ -61,6 +61,18 @@ defmodule LiveViewStudioWeb.DonationsLive do
       <%= sort_indicator(@sort_by, @options) %>
     </.link>
     """
+  end
+
+  defp param_to_integer(nil, default), do: default
+
+  defp param_to_integer(param, default) do
+    case Integer.parse(param) do
+      {number, _} ->
+        number
+
+      :error ->
+        default
+    end
   end
 
   defp sort_indicator(column, %{sort_by: sort_by, sort_order: sort_order})
