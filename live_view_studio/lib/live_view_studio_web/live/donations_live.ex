@@ -56,11 +56,9 @@ defmodule LiveViewStudioWeb.DonationsLive do
     assigns = assign(assigns, params: params)
 
     ~H"""
-    <.link patch={
-      ~p"/donations?#{@params}"
-    }>
-      <%= render_slot(@inner_block) %>
-      <%= sort_indicator(@sort_by, @options) %>
+    <.link patch={~p"/donations?#{@params}"}>
+      {render_slot(@inner_block)}
+      {sort_indicator(@sort_by, @options)}
     </.link>
     """
   end
@@ -94,7 +92,7 @@ defmodule LiveViewStudioWeb.DonationsLive do
   end
 
   defp sort_indicator(column, %{sort_by: sort_by, sort_order: sort_order})
-      when column == sort_by do
+       when column == sort_by do
     case sort_order do
       :asc -> "👆"
       :desc -> "👇"
@@ -111,15 +109,15 @@ defmodule LiveViewStudioWeb.DonationsLive do
   end
 
   defp valid_sort_by(%{"sort_by" => sort_by})
-          when sort_by in ~w(item quantity days_until_expires) do
-      String.to_existing_atom(sort_by)
+       when sort_by in ~w(item quantity days_until_expires) do
+    String.to_existing_atom(sort_by)
   end
 
   defp valid_sort_by(_params), do: :id
 
   defp valid_sort_order(%{"sort_order" => sort_order})
-          when sort_order in ~w(asc desc) do
-      String.to_existing_atom(sort_order)
+       when sort_order in ~w(asc desc) do
+    String.to_existing_atom(sort_order)
   end
 
   defp valid_sort_order(_params), do: :asc

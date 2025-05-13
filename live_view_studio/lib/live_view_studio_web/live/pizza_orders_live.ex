@@ -36,14 +36,14 @@ defmodule LiveViewStudioWeb.PizzaOrdersLive do
   end
 
   defp valid_sort_order(%{"sort_order" => sort_order})
-        when sort_order in ~w(asc desc) do
+       when sort_order in ~w(asc desc) do
     String.to_existing_atom(sort_order)
   end
 
   defp valid_sort_order(_params), do: :asc
 
   defp valid_sort_by(%{"sort_by" => sort_by})
-        when sort_by in ~w(id size style topping_1 topping_2 price) do
+       when sort_by in ~w(id size style topping_1 topping_2 price) do
     String.to_existing_atom(sort_by)
   end
 
@@ -54,14 +54,14 @@ defmodule LiveViewStudioWeb.PizzaOrdersLive do
     <.link patch={
       ~p"/pizza-orders?#{%{sort_by: @sort_by, sort_order: next_sort_order(@options.sort_order)}}"
     }>
-      <%= render_slot(@inner_block) %>
-      <%= sort_indicator(@sort_by, @options) %>
+      {render_slot(@inner_block)}
+      {sort_indicator(@sort_by, @options)}
     </.link>
     """
   end
 
   defp sort_indicator(column, %{sort_by: sort_by, sort_order: sort_order})
-      when column == sort_by do
+       when column == sort_by do
     case sort_order do
       :asc -> "👆"
       :desc -> "👇"
@@ -78,7 +78,6 @@ defmodule LiveViewStudioWeb.PizzaOrdersLive do
   end
 
   def handle_event("select-per-page", %{"per-page" => per_page}, socket) do
-
     params = %{socket.assigns.options | per_page: per_page}
 
     socket = push_patch(socket, to: ~p"/pizza-orders?#{params}")
@@ -100,5 +99,17 @@ defmodule LiveViewStudioWeb.PizzaOrdersLive do
 
   defp more_pages?(options, pizza_order_count) do
     options.page * options.per_page < pizza_order_count
+  end
+
+  defp pages(options, pizza_order_count) do
+    page_count = ceil(pizza_order_count / options.per_page)
+
+    for page_number <- (options.page - 2)..(options.page + 2),
+        page_number > 0 do
+      if page_number <= page_count do
+        current_page? = page_number == options.page
+        {page_number, current_page?}
+      end
+    end
   end
 end

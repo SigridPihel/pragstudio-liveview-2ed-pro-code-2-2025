@@ -1,20 +1,20 @@
 <h1>Daily Boat Rentals</h1>
 
 <.promo expiration={2}>
-    Save 25% on rentals!
-    <:legal>
+  Save 25% on rentals!
+  <:legal>
     <Heroicons.exclamation_circle /> Limit 1 per party
-    </:legal>
+  </:legal>
 </.promo>
 
 <div id="boats">
-    <.filter_form filter={@filter} />
+  <.filter_form filter={@filter} />
 
-    <div class="boats">
+  <div class="boats">
     <.boat :for={boat <- @boats} boat={boat} />
-    </div>
+  </div>
 </div>
 
 <.promo>
-    Hurry, only 3 boats left!
+  Hurry, only 3 boats left!
 </.promo>
