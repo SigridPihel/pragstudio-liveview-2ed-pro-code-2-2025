@@ -8,6 +8,10 @@ defmodule LiveViewStudio.Donations do
 
   alias LiveViewStudio.Donations.Donation
 
+  def donation_count do
+    Repo.aggregate(Donation, :count, :id)
+  end
+
   @doc """
   Returns the list of donations.
 
@@ -17,9 +21,6 @@ defmodule LiveViewStudio.Donations do
       [%Donation{}, ...]
 
   """
-  def donation_count do
-    Repo.aggregate(Donation, :count, :id)
-  end
 
   def list_donations do
     Repo.all(from d in Donation, order_by: [asc: d.id])

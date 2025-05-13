@@ -23,11 +23,13 @@ defmodule LiveViewStudioWeb.PizzaOrdersLive do
     }
 
     pizza_orders = PizzaOrders.list_pizza_orders(options)
+    pizza_order_count = PizzaOrders.pizza_order_count()
 
     socket =
       assign(socket,
         pizza_orders: pizza_orders,
-        options: options
+        options: options,
+        pizza_order_count: pizza_order_count
       )
 
     {:noreply, socket}
@@ -94,5 +96,9 @@ defmodule LiveViewStudioWeb.PizzaOrdersLive do
       :error ->
         default
     end
+  end
+
+  defp more_pages?(options, pizza_order_count) do
+    options.page * options.per_page < pizza_order_count
   end
 end

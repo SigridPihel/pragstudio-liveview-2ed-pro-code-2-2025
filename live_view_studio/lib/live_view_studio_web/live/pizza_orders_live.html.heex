@@ -65,5 +65,21 @@
         </tr>
       </tbody>
     </table>
+    <div class="footer">
+      <div class="pagination">
+        <.link 
+          :if={@options.page > 1}
+          patch={~p"/pizza-orders?#{%{@options | page: @options.page - 1}}"
+        }>
+          Previous
+        </.link>
+        <.link 
+          :if={more_pages?(@options, @pizza_order_count)}
+          patch={~p"/pizza-orders?#{%{@options | page: @options.page + 1}}"
+        }>
+          Next
+        </.link>
+      </div>
+    </div>
   </div>
 </div>
