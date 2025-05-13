@@ -12,9 +12,14 @@ defmodule LiveViewStudioWeb.PizzaOrdersLive do
     sort_by = valid_sort_by(params)
     sort_order = valid_sort_order(params)
 
+    page = param_to_integer(params["page"], 1)
+    per_page = param_to_integer(params["per_page"], 5)
+
     options = %{
       sort_by: sort_by,
-      sort_order: sort_order
+      sort_order: sort_order,
+      per_page: per_page,
+      page: page
     }
 
     pizza_orders = PizzaOrders.list_pizza_orders(options)
@@ -67,6 +72,27 @@ defmodule LiveViewStudioWeb.PizzaOrdersLive do
     case sort_order do
       :asc -> :desc
       :desc -> :asc
+    end
+  end
+
+  def handle_event("select-per-page", %{"per-page" => per_page}, socket) do
+
+    params = %{socket.assigns.options | per_page: per_page}
+
+    socket = push_patch(socket, to: ~p"/pizza-orders?#{params}")
+
+    {:noreply, socket}
+  end
+
+  defp param_to_integer(nil, default), do: default
+
+  defp param_to_integer(param, default) do
+    case Integer.parse(param) do
+      {number, _} ->
+        number
+
+      :error ->
+        default
     end
   end
 end
