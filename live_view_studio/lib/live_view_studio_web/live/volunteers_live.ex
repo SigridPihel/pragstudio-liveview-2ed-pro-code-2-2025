@@ -69,10 +69,14 @@ defmodule LiveViewStudioWeb.VolunteersLive do
           )
 
         changeset = Volunteers.change_volunteer(%Volunteer{})
-        {:noreply, assign(socket, :form, to_form(changeset))}
+        {:noreply, assign_form(socket, changeset)}
 
       {:error, changeset} ->
-        {:noreply, assign(socket, :form, to_form(changeset))}
+        {:noreply, assign_form(socket, changeset)}
     end
+  end
+
+  defp assign_form(socket, %Ecto.Changeset{} = changeset) do
+    assign(socket, :form, to_form(changeset))
   end
 end
