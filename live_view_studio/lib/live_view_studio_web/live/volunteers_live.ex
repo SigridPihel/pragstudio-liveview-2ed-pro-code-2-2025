@@ -14,6 +14,8 @@ defmodule LiveViewStudioWeb.VolunteersLive do
       |> stream(:volunteers, volunteers)
       |> assign(:form, to_form(changeset))
 
+    # IO.inspect(socket.assigns.streams.volunteers, label: "mount")
+
     {:ok, socket}
   end
 
@@ -68,6 +70,9 @@ defmodule LiveViewStudioWeb.VolunteersLive do
   end
 
   def handle_event("validate", %{"volunteer" => volunteer_params}, socket) do
+
+    # IO.inspect(socket.assigns.streams.volunteers, label: "validate")
+
     changeset =
       %Volunteer{}
       |> Volunteers.change_volunteer(volunteer_params)
@@ -80,6 +85,8 @@ defmodule LiveViewStudioWeb.VolunteersLive do
     case Volunteers.create_volunteer(volunteer_params) do
       {:ok, volunteer} ->
         socket = stream_insert(socket, :volunteers, volunteer, at: 0)
+
+        # IO.inspect(socket.assigns.streams.volunteers, label: "save")
 
         socket = put_flash(socket, :info, "Volunteer successfully checked in!")
         changeset = Volunteers.change_volunteer(%Volunteer{})
