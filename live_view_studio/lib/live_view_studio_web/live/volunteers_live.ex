@@ -11,6 +11,7 @@ defmodule LiveViewStudioWeb.VolunteersLive do
     socket =
       socket
       |> stream(:volunteers, volunteers)
+      |> assign(:count, length(volunteers))
 
     # IO.inspect(socket.assigns.streams.volunteers, label: "mount")
 
@@ -24,6 +25,7 @@ defmodule LiveViewStudioWeb.VolunteersLive do
       <.live_component
         module={VolunteerFormComponent}
         id={:new}
+        count={@count}
       />
 
       <pre>
@@ -80,6 +82,7 @@ defmodule LiveViewStudioWeb.VolunteersLive do
   end
 
   def handle_info({:volunteer_created, volunteer}, socket) do
+    socket = update(socket, :count, &(&1 + 1))
     socket = stream_insert(socket, :volunteers, volunteer, at: 0)
     {:noreply, socket}
   end
