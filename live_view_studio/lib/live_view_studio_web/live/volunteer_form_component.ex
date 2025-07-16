@@ -20,34 +20,6 @@ defmodule LivewViewStudioWeb.VolunteerFormComponent do
     {:ok, socket}
   end
 
-   def render(assigns) do
-    ~H"""
-    <div>
-      <div class="count">
-        Go for it! You'll be volunteer #<%= @count %>
-      </div>
-      <.form for={@form} phx-submit="save" phx-change="validate" phx-target={@myself}>
-        <.input
-          field={@form[:name]}
-          placeholder="Name"
-          autocomplete="off"
-          phx-debounce="2000"
-        />
-        <.input
-          field={@form[:phone]}
-          type="tel"
-          placeholder="Phone"
-          autocomplete="off"
-          phx-debounce="blur"
-        />
-        <.button phx-disable-with="Saving...">
-          Check In
-        </.button>
-      </.form>
-    </div>
-    """
-  end
-
   def handle_event("delete", %{"id" => id}, socket) do
     volunteer = Volunteers.get_volunteer!(id)
     {:ok, _volunteer} = Volunteers.delete_volunteer(volunteer)
