@@ -20,17 +20,6 @@ defmodule LivewViewStudioWeb.VolunteerFormComponent do
     {:ok, socket}
   end
 
-  def handle_event("delete", %{"id" => id}, socket) do
-    volunteer = Volunteers.get_volunteer!(id)
-    {:ok, _volunteer} = Volunteers.delete_volunteer(volunteer)
-
-    socket = stream_delete(socket, :volunteers, volunteer)
-
-    IO.inspect(socket.assigns.streams.volunteers, label: "delete")
-
-    {:noreply, socket}
-  end
-
   def handle_event("validate", %{"volunteer" => volunteer_params}, socket) do
 
     # IO.inspect(socket.assigns.streams.volunteers, label: "validate")
