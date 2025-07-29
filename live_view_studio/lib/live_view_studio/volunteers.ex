@@ -68,7 +68,7 @@ defmodule LiveViewStudio.Volunteers do
     %Volunteer{}
     |> Volunteer.changeset(attrs)
     |> Repo.insert()
-    |> broadcast({:volunteer_created, volunteer})
+    |> broadcast(:volunteer_created)
   end
 
   @doc """
@@ -104,6 +104,7 @@ defmodule LiveViewStudio.Volunteers do
   """
   def delete_volunteer(%Volunteer{} = volunteer) do
     Repo.delete(volunteer)
+    |> broadcast(:volunteer_deleted)
   end
 
   @doc """
