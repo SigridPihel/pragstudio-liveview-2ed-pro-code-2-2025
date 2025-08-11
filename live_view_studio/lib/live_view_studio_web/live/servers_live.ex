@@ -6,6 +6,10 @@ defmodule LiveViewStudioWeb.ServersLive do
   alias LivewViewStudioWeb.ServerFormComponent
 
   def mount(_params, _session, socket) do
+    if connected?(socket) do
+      Servers.subscribe()
+    end
+
     IO.inspect(self(), label: "MOUNT")
     servers = Servers.list_servers()
 
@@ -141,11 +145,7 @@ defmodule LiveViewStudioWeb.ServersLive do
       %{status: new_status}
     )
 
-    servers =
-      socket.assigns.servers
-      |> Enum.map(fn s -> if server.id == s.id, do: server, else: s end)
-
-    {:noreply, assign(socket, selected_server: server, servers: servers)}
+    {:noreply, socket}
   end
 
   def handle_event("drink", _, socket) do
@@ -154,13 +154,25 @@ defmodule LiveViewStudioWeb.ServersLive do
     {:noreply, update(socket, :coffees, &(&1 + 1))}
   end
 
-  def handle_info({ServerFormComponent, :server_created, server}, socket) do
+  def handle_info({:server_created, server}, socket) do
     socket =
           update(socket,
           :servers,
           fn servers -> [server | servers] end
           )
-    socket = push_patch(socket, to: ~p"/servers/#{server}")
+    {:noreply, socket}
+  end
+
+  def handle_info({:server_updated, server}, socket) do
+    socket =
+      if server.id == socket.assigns.selected_server.id do
+        assign(socket, selected_server: server)
+      else
+        socket
+      end
+
+    socket = assign(socket, servers: Servers.list_servers())
+
     {:noreply, socket}
   end
 end
