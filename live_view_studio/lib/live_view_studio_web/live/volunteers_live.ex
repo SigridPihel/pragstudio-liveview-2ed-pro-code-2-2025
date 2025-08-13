@@ -54,14 +54,14 @@ defmodule LiveViewStudioWeb.VolunteersLive do
       id={@id}
     >
       <div class="name">
-        <%= @volunteer.name %>
+        {@volunteer.name}
       </div>
       <div class="phone">
-        <%= @volunteer.phone %>
+        {@volunteer.phone}
       </div>
       <div class="status">
         <button phx-click="toggle-status" phx-value-id={@volunteer.id}>
-          <%= if @volunteer.checked_out, do: "Check In", else: "Check Out" %>
+          {if @volunteer.checked_out, do: "Check In", else: "Check Out"}
         </button>
       </div>
       <.link

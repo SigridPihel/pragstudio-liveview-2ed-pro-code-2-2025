@@ -39,10 +39,10 @@ defmodule LiveViewStudioWeb.ServersLive do
 
     socket =
       if socket.assigns.live_action == :new do
-          assign(socket,
-            coffees: 0,
-            selected_server: nil
-          )
+        assign(socket,
+          coffees: 0,
+          selected_server: nil
+        )
       else
         assign(socket, selected_server: hd(socket.assigns.servers))
       end
@@ -58,10 +58,7 @@ defmodule LiveViewStudioWeb.ServersLive do
     <div id="servers">
       <div class="sidebar">
         <div class="nav">
-          <.link
-            patch={~p"/servers/new"}
-            class="add"
-          >
+          <.link patch={~p"/servers/new"} class="add">
             + Add New Server
           </.link>
           <.link
@@ -83,10 +80,7 @@ defmodule LiveViewStudioWeb.ServersLive do
       <div class="main">
         <div class="wrapper">
           <%= if @live_action == :new do %>
-            <.live_component
-              module={ServerFormComponent}
-              id="new"
-            />
+            <.live_component module={ServerFormComponent} id="new" />
           <% else %>
             <.server server={@selected_server} />
           <% end %>
@@ -143,10 +137,11 @@ defmodule LiveViewStudioWeb.ServersLive do
 
     new_status = if server.status == "up", do: "down", else: "up"
 
-    {:ok, server} = Servers.update_server(
-      server,
-      %{status: new_status}
-    )
+    {:ok, server} =
+      Servers.update_server(
+        server,
+        %{status: new_status}
+      )
 
     {:noreply, socket}
   end
@@ -159,10 +154,12 @@ defmodule LiveViewStudioWeb.ServersLive do
 
   def handle_info({:server_created, server}, socket) do
     socket =
-          update(socket,
-          :servers,
-          fn servers -> [server | servers] end
-          )
+      update(
+        socket,
+        :servers,
+        fn servers -> [server | servers] end
+      )
+
     {:noreply, socket}
   end
 

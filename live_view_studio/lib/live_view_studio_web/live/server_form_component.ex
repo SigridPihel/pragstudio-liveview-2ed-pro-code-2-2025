@@ -5,7 +5,6 @@ defmodule LivewViewStudioWeb.ServerFormComponent do
   alias LiveViewStudio.Servers.Server
 
   def mount(socket) do
-
     changeset = Servers.change_server(%Server{})
 
     {:ok, assign(socket, :form, to_form(changeset))}
@@ -14,17 +13,25 @@ defmodule LivewViewStudioWeb.ServerFormComponent do
   def render(assigns) do
     ~H"""
     <div>
-       <.form
+      <.form
         for={@form}
         phx-submit="save"
         phx-change="validate"
         phx-target={@myself}
-       >
+      >
         <div class="field">
-          <.input field={@form[:name]} placeholder="Name" phx-debounce="blur" />
+          <.input
+            field={@form[:name]}
+            placeholder="Name"
+            phx-debounce="blur"
+          />
         </div>
         <div class="field">
-          <.input field={@form[:framework]} placeholder="Framework" phx-debounce="2000" />
+          <.input
+            field={@form[:framework]}
+            placeholder="Framework"
+            phx-debounce="2000"
+          />
         </div>
         <div class="field">
           <.input

@@ -7,7 +7,9 @@ defmodule LiveViewStudioWeb.UserSettingsLive do
     ~H"""
     <.header class="text-center">
       Account Settings
-      <:subtitle>Manage your account email address and password settings</:subtitle>
+      <:subtitle>
+        Manage your account email address and password settings
+      </:subtitle>
     </.header>
 
     <div class="space-y-12 divide-y">
@@ -18,7 +20,12 @@ defmodule LiveViewStudioWeb.UserSettingsLive do
           phx-submit="update_email"
           phx-change="validate_email"
         >
-          <.input field={@email_form[:email]} type="email" label="Email" required />
+          <.input
+            field={@email_form[:email]}
+            type="email"
+            label="Email"
+            required
+          />
           <.input
             field={@email_form[:current_password]}
             name="current_password"
@@ -49,7 +56,12 @@ defmodule LiveViewStudioWeb.UserSettingsLive do
             id="hidden_user_email"
             value={@current_email}
           />
-          <.input field={@password_form[:password]} type="password" label="New password" required />
+          <.input
+            field={@password_form[:password]}
+            type="password"
+            label="New password"
+            required
+          />
           <.input
             field={@password_form[:password_confirmation]}
             type="password"
@@ -65,7 +77,9 @@ defmodule LiveViewStudioWeb.UserSettingsLive do
             required
           />
           <:actions>
-            <.button phx-disable-with="Changing...">Change Password</.button>
+            <.button phx-disable-with="Changing...">
+              Change Password
+            </.button>
           </:actions>
         </.simple_form>
       </div>

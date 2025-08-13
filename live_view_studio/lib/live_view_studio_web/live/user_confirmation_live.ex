@@ -8,10 +8,20 @@ defmodule LiveViewStudioWeb.UserConfirmationLive do
     <div class="mx-auto max-w-sm">
       <.header class="text-center">Confirm Account</.header>
 
-      <.simple_form for={@form} id="confirmation_form" phx-submit="confirm_account">
-        <input type="hidden" name={@form[:token].name} value={@form[:token].value} />
+      <.simple_form
+        for={@form}
+        id="confirmation_form"
+        phx-submit="confirm_account"
+      >
+        <input
+          type="hidden"
+          name={@form[:token].name}
+          value={@form[:token].value}
+        />
         <:actions>
-          <.button phx-disable-with="Confirming..." class="w-full">Confirm my account</.button>
+          <.button phx-disable-with="Confirming..." class="w-full">
+            Confirm my account
+          </.button>
         </:actions>
       </.simple_form>
 

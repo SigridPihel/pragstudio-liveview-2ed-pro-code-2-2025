@@ -5,7 +5,6 @@ defmodule LivewViewStudioWeb.VolunteerFormComponent do
   alias LiveViewStudio.Volunteers.Volunteer
 
   def mount(socket) do
-
     changeset = Volunteers.change_volunteer(%Volunteer{})
 
     {:ok, assign(socket, :form, to_form(changeset))}
@@ -21,7 +20,6 @@ defmodule LivewViewStudioWeb.VolunteerFormComponent do
   end
 
   def handle_event("validate", %{"volunteer" => volunteer_params}, socket) do
-
     # IO.inspect(socket.assigns.streams.volunteers, label: "validate")
 
     changeset =
@@ -50,6 +48,4 @@ defmodule LivewViewStudioWeb.VolunteerFormComponent do
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
     assign(socket, :form, to_form(changeset))
   end
-
-
 end
