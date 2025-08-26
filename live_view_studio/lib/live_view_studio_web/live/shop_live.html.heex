@@ -31,12 +31,11 @@
     </div>
   </div>
 
-  <div 
-    id="backdrop" 
-    class={unless @show_cart, do: "hidden"} 
+  <div
+    id="backdrop"
+    class={unless @show_cart, do: "hidden"}
     phx-click={toggle_cart()}
   >
-
   </div>
 
   <div id="cart" class={unless @show_cart, do: "hidden"}>

@@ -51,10 +51,10 @@ defmodule LiveViewStudioWeb.BingoLive do
     ~H"""
     <li>
       <span class="username">
-        <%= @meta.username %>
+        {@meta.username}
       </span>
       <span class="timestamp">
-        <%= @meta.timestamp %>
+        {@meta.timestamp}
       </span>
     </li>
     """
