@@ -37,9 +37,9 @@ defmodule LiveViewStudioWeb.PresenceLive do
         <h2>
           Who's Here?
           <button
-            phx-click={JS.toggle(to: "#presences")}
+            phx-click={toggle_presences()}
           >
-           <Heroicons.list_bullet class="w-16 h-16" />
+           <Heroicons.list_bullet class="w-16 h-16" data-role="list-bullet" />
           </button>
         </h2>
         <ul id="presences">
@@ -71,6 +71,19 @@ defmodule LiveViewStudioWeb.PresenceLive do
       </div>
     </div>
     """
+  end
+
+  def toggle_presences do
+    JS.toggle(to: "#presences")
+    |> JS.remove_class(
+      "bg-slate-400",
+      to: "[data-role='list-bullet'].bg-slate-400"
+      )
+    |> JS.add_class(
+      "bg-slate-400",
+      to: "[data-role='list-bullet']:not(.bg-slate-400)"
+    )
+
   end
 
   def handle_event("click-like", _, socket) do
