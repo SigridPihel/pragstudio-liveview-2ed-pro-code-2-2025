@@ -20,7 +20,6 @@ defmodule LiveViewStudioWeb.BookingsLive do
         <div
           id="booking-calendar"
           phx-hook="Calendar"
-          data-unavailable-dates={Jason.encode!(@bookings)}
         >
         </div>
       </div>
@@ -59,6 +58,10 @@ defmodule LiveViewStudioWeb.BookingsLive do
     }
   end
 
+  def handle_event("unavailable-dates", _, socket) do
+    {:reply, %{dates: socket.assigns.bookings}, socket}
+  end
+
   def handle_event("book-selected-dates", _, socket) do
     %{selected_dates: selected_dates, bookings: bookings} = socket.assigns
 
@@ -66,6 +69,7 @@ defmodule LiveViewStudioWeb.BookingsLive do
       socket
       |> assign(:bookings, [selected_dates | bookings])
       |> assign(:selected_dates, nil)
+      |> push_event("add-unavailable-dates", selected_dates)
 
     {:noreply, socket}
   end
