@@ -21,7 +21,7 @@ import "phoenix_html"
 import { Socket } from "phoenix"
 import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
-import Calendar from "./date-picker"
+import Calendar from "./date-picker2"
 
 let Hooks = {
   Calendar: Calendar
@@ -30,8 +30,10 @@ let Hooks = {
 let csrfToken =
   document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
 let liveSocket = new LiveSocket("/live", Socket, {
-  params: { _csrf_token: csrfToken },
+  params: { _csrf_token: csrfToken, timezone: timezone },
   hooks: Hooks
 });
 
