@@ -34,13 +34,29 @@ defmodule LiveViewStudioWeb.DonationsLive do
     {:noreply, socket}
   end
 
+  def handle_event("paginate", %{"key" => "ArrowRight"}, socket) do
+    {:noreply, goto_page(socket, socket.assigns.options.page + 1)}
+  end
+
+  def handle_event("paginate", %{"key" => "ArrowLeft"}, socket) do
+    {:noreply, goto_page(socket, socket.assigns.options.page - 1)}
+  end
+
+  def handle_event("paginate", _, socket), do: {:noreply, socket}
+
   def handle_event("select-per-page", %{"per-page" => per_page}, socket) do
     params = %{socket.assigns.options | per_page: per_page}
 
     socket = push_patch(socket, to: ~p"/donations?#{params}")
-
-    {:noreply, socket}
   end
+
+  defp goto_page(socket, page) when page > 0 do
+    params = %{socket.assigns.options | page: page}
+
+    socket = push_patch(socket, to: ~p"/donations?#{params}")
+  end
+
+  defp goto_page(socket, _page), do: socket
 
   attr :options, :map, required: true
   attr :sort_by, :atom, required: true
