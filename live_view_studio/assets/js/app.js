@@ -21,7 +21,7 @@ import "phoenix_html"
 import { Socket } from "phoenix"
 import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
-import Calendar from "./date-picker2"
+import Calendar from "./date-picker"
 import { AsYouType } from "../vendor/libphonenumber-js.min"
 
 
@@ -33,6 +33,21 @@ let Hooks = {
       });
     }
   },
+  Clipboard: {
+  mounted() {
+    const initialInnerHTML = this.el.innerHTML;
+    const { content } = this.el.dataset;
+
+    this.el.addEventListener("click", () => {
+      navigator.clipboard.writeText(content);
+
+      this.el.innerHTML = "Copied!";
+
+      setTimeout(() => {
+        this.el.innerHTML = initialInnerHTML;
+      }, 2000);
+    });
+  }},
   Calendar: Calendar
 }
 
