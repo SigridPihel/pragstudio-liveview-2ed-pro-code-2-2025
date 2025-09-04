@@ -22,8 +22,17 @@ import { Socket } from "phoenix"
 import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 import Calendar from "./date-picker2"
+import { AsYouType } from "../vendor/libphonenumber-js.min"
+
 
 let Hooks = {
+  PhoneNumber: {
+    mounted() {
+      this.el.addEventListener("input", e => {
+        this.el.value = new AsYouType("US").input(this.el.value);
+      });
+    }
+  },
   Calendar: Calendar
 }
 

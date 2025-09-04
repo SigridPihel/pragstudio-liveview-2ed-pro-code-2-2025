@@ -1,4 +1,4 @@
-import { EasePick } from "@easepick/bundle";
+import { EasePick } from "@easepick/bundle/dist";
 
 let Calendar = {
   mounted() {
