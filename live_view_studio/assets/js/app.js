@@ -23,6 +23,7 @@ import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 import Calendar from "./date-picker"
 import { AsYouType } from "../vendor/libphonenumber-js.min"
+import Uploaders from "./uploaders"
 
 
 let Hooks = {
@@ -58,7 +59,8 @@ const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 let liveSocket = new LiveSocket("/live", Socket, {
   params: { _csrf_token: csrfToken, timezone: timezone },
-  hooks: Hooks
+  hooks: Hooks,
+  uploaders: Uploaders
 });
 
 // Show progress bar on live navigation and form submits
