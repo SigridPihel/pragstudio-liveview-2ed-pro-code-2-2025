@@ -21,7 +21,7 @@
     </div>
 
     <.error :for={err <- upload_errors(@uploads.photos)}>
-      <%= Phoenix.Naming.humanize(err) %>
+      <%= error_to_string(err) %>
     </.error>
 
     <div class="entry" :for={entry <- @uploads.photos.entries}>
@@ -35,7 +35,7 @@
           <span style={"width: #{entry.progress}%"}></span>
         </div>
         <.error :for={err <- upload_errors(@uploads.photos, entry)}>
-          <%= Phoenix.Naming.humanize(err) %>
+          <%= error_to_string(err) %>
         </.error>
       </div>
 
